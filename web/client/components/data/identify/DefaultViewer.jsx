@@ -153,33 +153,33 @@ class DefaultViewer extends React.Component {
             return (
                 <div
                     style={{
-                         margin: "auto",
-                         display: "flex",
-                         flexDirection: "column",
-                         alignItems: "center"
+                        margin: "auto",
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center"
                     }}
                 >
-                  <div>
-                    <button
-                      className='btn btn-primary'
-                      onClick={() =>
-                        this.setState({openAttachment: true}, () => this.forceUpdate())}
-                    >
+                    <div>
+                        <button
+                            className="btn btn-primary"
+                            onClick={() =>
+                                this.setState({openAttachment: true}, () => this.forceUpdate())}
+                        >
                       Lihat Lampiran Foto/Video
-                    </button>
-                  </div>
-                  {this.state.openAttachment && (
-                    <ReactImageVideoLightbox
-                      data={this.state.attachments}
-                      startIndex={0}
-                    //   showResourceCount={true}
-                      showResourceCount
-                    onCloseCallback={() =>
-                        this.setState({openAttachment: false}, () => this.forceUpdate())}
-                    />
-                  )}
+                        </button>
+                    </div>
+                    {this.state.openAttachment && (
+                        <ReactImageVideoLightbox
+                            data={this.state.attachments}
+                            startIndex={0}
+                            //   showResourceCount={true}
+                            showResourceCount
+                            onCloseCallback={() =>
+                                this.setState({openAttachment: false}, () => this.forceUpdate())}
+                        />
+                    )}
                 </div>
-              );
+            );
         }
         return null;
     }
@@ -248,7 +248,7 @@ class DefaultViewer extends React.Component {
                             }
                         });
                     }
-                })
+                });
 
             }
         }
