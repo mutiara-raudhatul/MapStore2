@@ -17,7 +17,7 @@ import ViewerPage from './viewers/ViewerPage';
 import { isEmpty, reverse, startsWith } from 'lodash';
 import { getFormatForResponse } from '../../../utils/IdentifyUtils';
 import ReactImageVideoLightbox from 'react-image-video-lightbox/lib';
-import { convertGeoJSONToInternalModel } from '../../../utils/AnnotationsUtils';
+// import { convertGeoJSONToInternalModel } from '../../../utils/AnnotationsUtils';
 
 class DefaultViewer extends React.Component {
     static propTypes = {
@@ -152,17 +152,17 @@ class DefaultViewer extends React.Component {
         if (this.state.attachments && this.state.attachments.length > 0) {
             return (
                 <div
-                  style={{
-                    margin: "auto",
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                  }}
+                    style={{
+                         margin: "auto",
+                         display: "flex",
+                         flexDirection: "column",
+                         alignItems: "center"
+                    }}
                 >
                   <div>
                     <button
                       className='btn btn-primary'
-                      onClick={() => 
+                      onClick={() =>
                         this.setState({openAttachment: true}, () => this.forceUpdate())}
                     >
                       Lihat Lampiran Foto/Video
@@ -172,16 +172,17 @@ class DefaultViewer extends React.Component {
                     <ReactImageVideoLightbox
                       data={this.state.attachments}
                       startIndex={0}
-                      showResourceCount={true}
-                      onCloseCallback={() => 
+                    //   showResourceCount={true}
+                      showResourceCount
+                    onCloseCallback={() =>
                         this.setState({openAttachment: false}, () => this.forceUpdate())}
                     />
                   )}
                 </div>
               );
         }
-        return null
-    } 
+        return null;
+    }
 
     renderPages = () => {
         const {validResponses: responses} = this.getResponseProperties();
@@ -218,7 +219,8 @@ class DefaultViewer extends React.Component {
 
     render() {
         const Container = this.props.container;
-        const {responses, currResponse, emptyResponses} = this.getResponseProperties();
+        // const {responses, currResponse, emptyResponses} = this.getResponseProperties();
+        const {currResponse, emptyResponses} = this.getResponseProperties();
         let componentOrder = [this.renderEmptyLayers(),
             <Container {...this.props.containerProps}
                 onChangeIndex={(index) => {
@@ -234,17 +236,17 @@ class DefaultViewer extends React.Component {
         ];
         if (currResponse && currResponse.length > 0) {
             const resp = currResponse[0].response;
-            if (resp.features && this.state.attachments.length == 0) {
+            if (resp.features && this.state.attachments.length === 0) {
                 resp.features.forEach(feature => {
                     if (feature.properties && feature.properties.___att) {
                         feature.properties.___att.split(';').forEach(att => {
                             if (att) {
-                                const attProp = att.split('#')
+                                const attProp = att.split('#');
                                 if (attProp.length > 2 && (attProp[1] === 'photo' || attProp[1] === 'video')) {
-                                    this.state.attachments.push({url: `/static/attachment/${attProp[0]}`, type: attProp[1], tanggal: attProp[2]})
+                                    this.state.attachments.push({url: `/static/attachment/${attProp[0]}`, type: attProp[1], tanggal: attProp[2]});
                                 }
                             }
-                        })
+                        });
                     }
                 })
 
